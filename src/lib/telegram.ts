@@ -21,7 +21,7 @@ function botUtils() {
 	bot.use(logger);
 
 	bot.start(ctx => {
-		return ctx.reply("This is a test bot.");
+		return ctx.reply("This is a graet bot.");
 	});
 
 	bot.command("about", about()).command("sendkey", sendkey()).command("getname", getname()).on("text", greeting());
