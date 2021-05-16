@@ -1,4 +1,3 @@
-import { author, homepage, name, version } from "../../package.json";
 
 
 const getname= () => (ctx: any) => {
