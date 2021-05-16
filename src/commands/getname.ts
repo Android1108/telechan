@@ -12,3 +12,4 @@ const getname= () => (ctx: any) => {
     ctx.reply(message);
 };
 
+export {getname};
