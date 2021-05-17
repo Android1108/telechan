@@ -19,29 +19,32 @@ const subCoin = () => (ctx: any) => {
   }else{
   let url='https://data.block.cc/api/v3/kline?desc=binance_'+coinName+'_USDT&type=15m&interval=1m&api_key=YPCNWDHCQYHJTPCTVLEQWUED1IJKWYM7F097TYTU&start='+startTime
  
- axios.get(url)
- .then(function (response) {
 
-  if(response.status==200){
-    var lastMin=response.data[response.data.length-1];
+setInterval(function(){
+  axios.get(url)
+  .then(function (response) {
+   if(response.status==200){
+     var lastMin=response.data[response.data.length-1];
+     var podong=(lastMin.o-lastMin.c)/lastMin.o;
+     podong=podong*100;
+     podong= Math.round(podong * 100) / 100//四舍五入
+     replyToMessage(ctx, messageId, `${coinName}最新一分钟的涨跌幅是:${podong}%`);
+ 
+     console.log(response);
+   }else{
+     replyToMessage(ctx, messageId, `没有找到该币种`);
+   }
+   
+  })
+  .catch(function (error) {
+    console.log(error);
+    replyToMessage(ctx, messageId, `失败,${error.data}`);
+  });
+ 
+},60000)
 
-    var podong=(lastMin.o-lastMin.c)/lastMin.o;
 
-    replyToMessage(ctx, messageId, `${coinName}最新一分钟的涨跌幅是:${podong}`);
 
-    console.log(response);
-  }else{
-    replyToMessage(ctx, messageId, `没有找到该币种`);
-  }
-  
-  
-  
-
- })
- .catch(function (error) {
-   console.log(error);
-   replyToMessage(ctx, messageId, `失败,${error.data}`);
- });
 
   }
 
