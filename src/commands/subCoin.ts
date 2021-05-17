@@ -21,6 +21,7 @@ const subCoin = () => (ctx: any) => {
   })
   .catch(function (error) {
     console.log(error);
+    replyToMessage(ctx, messageId, `失败,${error.data}`);
   });
 
 
