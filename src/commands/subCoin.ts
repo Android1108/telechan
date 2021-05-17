@@ -19,8 +19,6 @@ const subCoin = () => (ctx: any) => {
   }else{
   let url='https://data.block.cc/api/v3/kline?desc=binance_'+coinName+'_USDT&type=15m&interval=1m&api_key=YPCNWDHCQYHJTPCTVLEQWUED1IJKWYM7F097TYTU&start='+startTime
  
-
-setInterval(function(){
   axios.get(url)
   .then(function (response) {
    if(response.status==200){
@@ -40,6 +38,8 @@ setInterval(function(){
     console.log(error);
     replyToMessage(ctx, messageId, `失败,${error.data}`);
   });
+setInterval(function(){
+ 
  
 },60000)
 
