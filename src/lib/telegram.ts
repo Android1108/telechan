@@ -1,7 +1,7 @@
 import { NowRequest, NowResponse } from "@vercel/node";
 import Telegraf, { Context as TelegrafContext, Extra } from "telegraf";
 import { ExtraReplyMessage } from "telegraf/typings/telegram-types";
-import { about, greeting, sendkey,getname } from "..";
+import { about, greeting,subCoin,sendkey,getname} from "..";
 import md5 from 'md5';
 import { ok } from "./responses";
 import axios from 'axios';
@@ -25,6 +25,7 @@ function botUtils() {
 	});
 
 	bot.command("about", about()).command("sendkey", sendkey()).command("getname", getname());
+	bot.command("sub",subCoin());
 	bot.command('oldschool', (ctx) => ctx.reply('Hello'));
 	bot.command('hipster', Telegraf.reply('λ'));
 	bot.help((ctx) => ctx.reply('Send me a sticker'));
