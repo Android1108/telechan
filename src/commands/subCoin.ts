@@ -17,20 +17,25 @@ const subCoin = () => (ctx: any) => {
   if(coinName==""){
     replyToMessage(ctx, messageId, `请输入订阅的数字货币名称`);
   }else{
-
   let url='https://data.block.cc/api/v3/kline?desc=binance_'+coinName+'_USDT&type=15m&interval=1m&api_key=YPCNWDHCQYHJTPCTVLEQWUED1IJKWYM7F097TYTU&start='+startTime
  
  axios.get(url)
  .then(function (response) {
-  replyToMessage(ctx, messageId, `${coinName}，${response.data.length}`);
 
-   if(response.data.length<4){
-    replyToMessage(ctx, messageId, `没有找到该币种`);
-   }else{
-  
-    replyToMessage(ctx, messageId, `${coinName}，${response.data[response.data.length-1].T}`);
+  if(response.status==200){
+    var lastMin=response.data[response.data.length-1];
+
+    var podong=(lastMin.o-lastMin.c)/lastMin.o;
+
+    replyToMessage(ctx, messageId, `${coinName}最新一分钟的涨跌幅是:${podong}`);
+
     console.log(response);
-   }
+  }else{
+    replyToMessage(ctx, messageId, `没有找到该币种`);
+  }
+  
+  
+  
 
  })
  .catch(function (error) {
