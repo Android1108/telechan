@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-const BOT_TOKEN = process.env.BOT_TOKEN;
+
 const replyToMessage = (ctx: any, messageId: string, string: string) =>
   ctx.reply(string, {
     reply_to_message_id: messageId,
@@ -14,10 +14,18 @@ const subCoin = () => (ctx: any) => {
   
   const url="https://data.block.cc/api/v3/kline?desc=gate-io_shib_USDT&type=15m&interval=1m&api_key=YPCNWDHCQYHJTPCTVLEQWUED1IJKWYM7F097TYTU&start=1621228860000"
 
-  const ret =  axios.get(url);
+  axios.get(url)
+  .then(function (response) {
+    replyToMessage(ctx, messageId, `${messageText}，${response}`);
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 
 
-  replyToMessage(ctx, messageId, `${messageText}，${ret.data}`);
+
+  
   // replyToMessage(ctx, messageId, `Hello, ${userName} (user_id: ${ctx.from.id})! \n Your Message id is: ${messageId}`);
 };
 
