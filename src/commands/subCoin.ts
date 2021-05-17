@@ -6,6 +6,17 @@ const replyToMessage = (ctx: any, messageId: string, string: string) =>
     reply_to_message_id: messageId,
   });
 
+interface Sub {
+    T: any,
+    o: any,
+    h: any;
+    l: any;
+    c: any;
+    v: any;
+
+
+}
+
 const subCoin = () => (ctx: any) => {
   const messageText=ctx.message.text.substr(5);
 
@@ -16,7 +27,8 @@ const subCoin = () => (ctx: any) => {
 
   axios.get(url)
   .then(function (response) {
-    replyToMessage(ctx, messageId, `${messageText}，${response.data[response.data.length].get("T")}`);
+    
+    replyToMessage(ctx, messageId, `${messageText}，${response.data[response.data.length].T}`);
     console.log(response);
   })
   .catch(function (error) {
