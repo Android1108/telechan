@@ -21,15 +21,17 @@ function botUtils() {
 	bot.use(logger);
 
 	bot.start(ctx => {
-		return ctx.reply("This is a graet bot.");
+		return ctx.reply("This is a great bot.");
 	});
 
-	bot.command("about", about()).command("sendkey", sendkey()).command("getname", getname()).on("text", greeting());
-	bot.help((ctx) => ctx.reply('Send me a sticker'));
-	bot.on('sticker', (ctx) => ctx.reply('👍'));
-	bot.hears('hi', (ctx) => ctx.reply('Hey there'));
+	bot.command("about", about()).command("sendkey", sendkey()).command("getname", getname());
 	bot.command('oldschool', (ctx) => ctx.reply('Hello'));
 	bot.command('hipster', Telegraf.reply('λ'));
+	bot.help((ctx) => ctx.reply('Send me a sticker'));
+
+	bot.hears('hi', (ctx) => ctx.reply('Hey there'));
+
+	bot.on("text", greeting());
 
 }
 
