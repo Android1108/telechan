@@ -21,17 +21,19 @@ const subCoin = () => (ctx: any) => {
  
   axios.get(url)
   .then(function (response) {
-   if(response.status==200){
-     var lastMin=response.data[response.data.length-1];
-     var podong=(lastMin.o-lastMin.c)/lastMin.o;
-     podong=podong*100;
-     podong= Math.round(podong * 100) / 100//四舍五入
-     replyToMessage(ctx, messageId, `${coinName}最新一分钟的涨跌幅是:${podong}%`);
- 
-     console.log(response);
-   }else{
-     replyToMessage(ctx, messageId, `没有找到该币种`);
-   }
+
+    if(response.data instanceof Array){
+      var lastMin=response.data[response.data.length-1];
+      var podong=(lastMin.o-lastMin.c)/lastMin.o;
+      podong=podong*100;
+      podong= Math.round(podong * 100) / 100//四舍五入
+      replyToMessage(ctx, messageId, `${coinName}最新一分钟的涨跌幅是:${podong}%`);
+  
+      console.log(response);
+    }else{
+      replyToMessage(ctx, messageId, `没有找到该币种`);
+    }
+
    
   })
   .catch(function (error) {
