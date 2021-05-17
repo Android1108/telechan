@@ -14,7 +14,7 @@ const subCoin = () => (ctx: any) => {
   }else{
 
   let url='https://data.block.cc/api/v3/kline?desc=binance_'+subCoin+'_USDT&type=15m&interval=1m&api_key=YPCNWDHCQYHJTPCTVLEQWUED1IJKWYM7F097TYTU&start=1621228860000'
-
+  replyToMessage(ctx, messageId, `${coinName}，${url}`);
  axios.get(url)
  .then(function (response) {
    
