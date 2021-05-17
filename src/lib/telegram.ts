@@ -25,7 +25,6 @@ function botUtils() {
 	});
 
 	bot.command("about", about()).command("sendkey", sendkey()).command("getname", getname()).on("text", greeting());
-
 	bot.help((ctx) => ctx.reply('Send me a sticker'));
 	bot.on('sticker', (ctx) => ctx.reply('👍'));
 	bot.hears('hi', (ctx) => ctx.reply('Hey there'));
