@@ -17,7 +17,7 @@ const subCoin = () => (ctx: any) => {
  
  axios.get(url)
  .then(function (response) {
-
+  replyToMessage(ctx, messageId, `${coinName}，${response.data.length}`);
   replyToMessage(ctx, messageId, `${coinName}，${response.data[response.data.length-1].T}`);
   console.log(response);
   //  if(response.data.length<4){
