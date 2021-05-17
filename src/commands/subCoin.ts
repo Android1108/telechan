@@ -7,26 +7,29 @@ const replyToMessage = (ctx: any, messageId: string, string: string) =>
   });
 
 const subCoin = () => (ctx: any) => {
-  const messageText=ctx.message.text.substr(5);
-
   const messageId = ctx.message.message_id;
-  // const userName = ctx.from.last_name ? `${ctx.from.first_name} ${ctx.from.last_name}` : ctx.from.first_name;
-  
-  const url="https://data.block.cc/api/v3/kline?desc=gate-io_shib_USDT&type=15m&interval=1m&api_key=YPCNWDHCQYHJTPCTVLEQWUED1IJKWYM7F097TYTU&start=1621228860000"
+  const coinName=ctx.message.text.substr(5);
+  if(coinName==""){
+    replyToMessage(ctx, messageId, `请输入订阅的数字货币名称`);
+  }else{
+  let url='https://data.block.cc/api/v3/kline?type=15m&interval=1m&api_key=YPCNWDHCQYHJTPCTVLEQWUED1IJKWYM7F097TYTU&start=1621228860000$'
 
-  axios.get(url)
-  .then(function (response) {
-    replyToMessage(ctx, messageId, `${messageText}，${response.data.length}`);
-    replyToMessage(ctx, messageId, `${messageText}，${response.data[0]}`);
-    replyToMessage(ctx, messageId, `${messageText}，${response.data[0].T}`);
-    replyToMessage(ctx, messageId, `${messageText}，${response.data[response.data.length-1].T}`);
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-    replyToMessage(ctx, messageId, `失败,${error.data}`);
-  });
+ axios.get(url,{
+   desc: 'binancee_${subCoin}_USDT'
+ })
+ .then(function (response) {
+   replyToMessage(ctx, messageId, `${coinName}，${response.data[response.data.length-1].T}`);
+   console.log(response);
+ })
+ .catch(function (error) {
+   console.log(error);
+   replyToMessage(ctx, messageId, `失败,${error.data}`);
+ });
 
+  }
+
+
+ 
 
 
   
