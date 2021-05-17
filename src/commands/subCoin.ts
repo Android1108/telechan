@@ -9,22 +9,28 @@ const replyToMessage = (ctx: any, messageId: string, string: string) =>
 const subCoin = () => (ctx: any) => {
   const messageId = ctx.message.message_id;
   const coinName=ctx.message.text.substr(5);
+  const fiveSecond=300000;
+
+  const startTime=new Date().getTime()-fiveSecond
+  console.log(startTime)
+
   if(coinName==""){
     replyToMessage(ctx, messageId, `请输入订阅的数字货币名称`);
   }else{
 
-  let url='https://data.block.cc/api/v3/kline?desc=binance_'+coinName+'_USDT&type=15m&interval=1m&api_key=YPCNWDHCQYHJTPCTVLEQWUED1IJKWYM7F097TYTU&start=1621228860000'
+  let url='https://data.block.cc/api/v3/kline?desc=binance_'+coinName+'_USDT&type=15m&interval=1m&api_key=YPCNWDHCQYHJTPCTVLEQWUED1IJKWYM7F097TYTU&start='+startTime
  
  axios.get(url)
  .then(function (response) {
   replyToMessage(ctx, messageId, `${coinName}，${response.data.length}`);
-  replyToMessage(ctx, messageId, `${coinName}，${response.data[response.data.length-1].T}`);
-  console.log(response);
-  //  if(response.data.length<4){
-  //   replyToMessage(ctx, messageId, `没有找到该币种`);
-  //  }else{
- 
-  //  }
+
+   if(response.data.length<4){
+    replyToMessage(ctx, messageId, `没有找到该币种`);
+   }else{
+  
+    replyToMessage(ctx, messageId, `${coinName}，${response.data[response.data.length-1].T}`);
+    console.log(response);
+   }
 
  })
  .catch(function (error) {
