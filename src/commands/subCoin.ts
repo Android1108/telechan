@@ -19,39 +19,54 @@ const subCoin = () => (ctx: any) => {
   if(coinName==""){
     ctx.telegram.sendMessage(chat_id, `请输入订阅的数字货币名称`)
   }else{
-    sendCoinInfo(ctx,chat_id,coinName)
 
-
-
-   schedule.scheduleJob("sendCoinTask",'10 * * * * *', () => {
-    console.log(new Date());
 
     sendCoinInfo(ctx,chat_id,coinName)
 
 
-    // axios.get(url)
-    // .then(function (response) {
-    //   if(response.data instanceof Array){
-    //     var lastMin=response.data[response.data.length-1];
-    //     var podong=(lastMin.o-lastMin.c)/lastMin.o;
-    //     podong=podong*100;
-    //     podong= Math.round(podong * 100) / 100//四舍五入
-    //     replyToMessage(ctx, messageId, `${coinName}最新一分钟的涨跌幅是:${podong}%`);
+    const job = schedule.scheduleJob('10 * * * * *', function(){
+      console.log('The answer to life, the universe, and everything!');
+      sendCoinInfo(ctx,chat_id,coinName)
+    });
+
+    if(coinName=="cancel"){
+      ctx.telegram.sendMessage(chat_id, `取消成功`)
+      job.cancel();
+    }
+
+
+ 
+
+
+  //  schedule.scheduleJob("sendCoinTask",'10 * * * * *', () => {
+ 
+
+ 
+
+
+  //   // axios.get(url)
+  //   // .then(function (response) {
+  //   //   if(response.data instanceof Array){
+  //   //     var lastMin=response.data[response.data.length-1];
+  //   //     var podong=(lastMin.o-lastMin.c)/lastMin.o;
+  //   //     podong=podong*100;
+  //   //     podong= Math.round(podong * 100) / 100//四舍五入
+  //   //     replyToMessage(ctx, messageId, `${coinName}最新一分钟的涨跌幅是:${podong}%`);
     
-    //     console.log(response);
-    //   }else{
-    //     replyToMessage(ctx, messageId, `没有找到该币种`);
-    //   }
-    // })
-    // .catch(function (error) {
-    //   console.log(error);
-    //   replyToMessage(ctx, messageId, `没有找到该币种`);
-    // });
-  });
+  //   //     console.log(response);
+  //   //   }else{
+  //   //     replyToMessage(ctx, messageId, `没有找到该币种`);
+  //   //   }
+  //   // })
+  //   // .catch(function (error) {
+  //   //   console.log(error);
+  //   //   replyToMessage(ctx, messageId, `没有找到该币种`);
+  //   // });
+  // });
 
 
 
-  }
+  // }
 
 
  
