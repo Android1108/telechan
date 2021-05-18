@@ -1,10 +1,8 @@
 
 import axios from 'axios';
-const schedule = require('node-schedule');
+// const schedule = require('node-schedule');
 // const BOT_TOKEN = process.env.BOT_TOKEN;
 const fiveSecond=300000;
-
-
 // const replyToMessage = (ctx: any, messageId: string, string: string) =>
 //   ctx.reply(string, {
 //     reply_to_message_id: messageId,
@@ -82,7 +80,7 @@ const subCoin = () => (ctx: any) => {
 
   
   // replyToMessage(ctx, messageId, `Hello, ${userName} (user_id: ${ctx.from.id})! \n Your Message id is: ${messageId}`);
-};
+
 
 
 async function  sendCoinInfo(ctx: any,chat_id:String,coinName:String){
@@ -107,7 +105,6 @@ async function  sendCoinInfo(ctx: any,chat_id:String,coinName:String){
       }
       ctx.telegram.sendMessage(chat_id, `【${coinName}${state}】最近一分钟的涨跌幅是:${podong}%`)
 
-  
       console.log(response);
     }else{
 
