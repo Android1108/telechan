@@ -1,14 +1,14 @@
 
 import axios from 'axios';
-const schedule = require('node-schedule');
-const BOT_TOKEN = process.env.BOT_TOKEN;
+// const schedule = require('node-schedule');
+// const BOT_TOKEN = process.env.BOT_TOKEN;
 const fiveSecond=300000;
 
 
-const replyToMessage = (ctx: any, messageId: string, string: string) =>
-  ctx.reply(string, {
-    reply_to_message_id: messageId,
-  });
+// const replyToMessage = (ctx: any, messageId: string, string: string) =>
+//   ctx.reply(string, {
+//     reply_to_message_id: messageId,
+//   });
 
 const subCoin = () => (ctx: any) => {
 
