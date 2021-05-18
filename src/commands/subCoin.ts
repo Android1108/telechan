@@ -19,15 +19,7 @@ const subCoin = () => (ctx: any) => {
   }else{
     sendCoinInfo(ctx,chat_id,coinName).then(() => {
       console.log('The answer to life, the universe, and everything!');
-      setTimeout(function(){
-        ctx.telegram.sendMessage(chat_id, `订阅成功，${coinName}将在剧烈波动时提醒您`)
-      },1000)
-
-      setInterval(function(){
-        console.log('循环启动');
-        sendCoinInfo(ctx,chat_id,coinName)
-      },60000)
-
+    
     });
       
     }
@@ -106,6 +98,31 @@ async function  sendCoinInfo(ctx: any,chat_id:String,coinName:String){
       ctx.telegram.sendMessage(chat_id, `【${coinName}${state}】最近一分钟的涨跌幅是:${podong}%`)
 
       console.log(response);
+
+      setInterval(function(){
+        console.info("222");
+      },1000)
+
+
+      setTimeout(function(){
+        console.info("循环启动111");
+      },1000)
+
+
+      setTimeout(function(){
+
+        ctx.telegram.sendMessage(chat_id, `订阅成功，${coinName}将在剧烈波动时提醒您`)
+      },1000)
+
+      setInterval(function(){
+        console.info("循环启动");
+        sendCoinInfo(ctx,chat_id,coinName)
+      },60000)
+
+
+
+
+
     }else{
 
       ctx.telegram.sendMessage(chat_id, `没有找到该币种`)
