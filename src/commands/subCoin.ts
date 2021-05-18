@@ -101,21 +101,12 @@ async function  sendCoinInfo(ctx: any,chat_id:String,coinName:String){
 
      
 
-      setTimeout(function(){
-        console.info("循环启动111");
-      },1000)
-
-
-      setTimeout(function(){
+      setInterval(function(){
 
         ctx.telegram.sendMessage(chat_id, `订阅成功，${coinName}将在剧烈波动时提醒您`)
-      },1000)
+      },5000)
 
-      setInterval(function(){
-        console.info("循环启动");
-        sendCoinInfo(ctx,chat_id,coinName)
-      },60000)
-
+    
 
 
 
