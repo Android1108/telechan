@@ -50,7 +50,7 @@ async function localBot() {
 	await bot.telegram.deleteWebhook();
 
 	debug(`starting polling`);
-	await bot.launch();
+	// await bot.launch();
 }
 
 export async function useWebhook(req: NowRequest, res: NowResponse) {
