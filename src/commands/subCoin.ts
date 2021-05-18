@@ -19,17 +19,32 @@ const subCoin = () => (ctx: any) => {
   if(coinName==""){
     ctx.telegram.sendMessage(chat_id, `请输入订阅的数字货币名称`)
   }else{
-    sendCoinInfo(ctx,chat_id,coinName)
-
-
-    const job = schedule.scheduleJob('10 * * * * *', function(){
+    sendCoinInfo(ctx,chat_id,coinName).then(() => {
       console.log('The answer to life, the universe, and everything!');
-      sendCoinInfo(ctx,chat_id,coinName)
-    });
+      setTimeout(function(){
+        ctx.telegram.sendMessage(chat_id, `订阅成功，${coinName}将在剧烈波动时提醒您`)
+      },1000)
 
-    if(coinName=="cancel"){
-      job.cancel();
+      setInterval(function(){
+        console.log('循环启动');
+        sendCoinInfo(ctx,chat_id,coinName)
+      },60000)
+
+    });
+      
     }
+
+
+
+
+    // const job = schedule.scheduleJob('10 * * * * *', function(){
+    //   console.log('The answer to life, the universe, and everything!');
+    //   sendCoinInfo(ctx,chat_id,coinName)
+    // });
+
+    // if(coinName=="cancel"){
+    //   job.cancel();
+    // }
 
 
 
