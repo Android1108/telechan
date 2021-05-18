@@ -23,9 +23,9 @@ const subCoin = () => (ctx: any) => {
 
 
 
-  let job = schedule.scheduleJob('10 * * * * *', () => {
+   schedule.scheduleJob("sendCoinTask",'10 * * * * *', () => {
     console.log(new Date());
-    
+
     sendCoinInfo(ctx,chat_id,coinName)
 
 
