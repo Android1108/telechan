@@ -98,13 +98,17 @@ async function  sendCoinInfo(ctx: any,chat_id:String,coinName:String){
       ctx.telegram.sendMessage(chat_id, `【${coinName}${state}】最近一分钟的涨跌幅是:${podong}%`)
 
       console.log(response);
+      send(ctx,chat_id,coinName);
 
      
 
-      setInterval(function(){
 
-        ctx.telegram.sendMessage(chat_id, `订阅成功，${coinName}将在剧烈波动时提醒您`)
-      },5000)
+      
+   
+
+    
+
+
 
     
 
@@ -122,5 +126,14 @@ async function  sendCoinInfo(ctx: any,chat_id:String,coinName:String){
   });
 
 }
+
+
+function send(ctx: any,chat_id:String,coinName:String){
+  setTimeout(function(){
+    sendCoinInfo(ctx,chat_id,coinName)
+    send(ctx,chat_id,coinName)
+  },5000)
+}
+
 
 export {subCoin};
