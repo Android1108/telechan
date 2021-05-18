@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 // const schedule = require('node-schedule');
-// const BOT_TOKEN = process.env.BOT_TOKEN;
+const BOT_TOKEN = process.env.BOT_TOKEN;
 const fiveSecond=300000;
 // const replyToMessage = (ctx: any, messageId: string, string: string) =>
 //   ctx.reply(string, {
@@ -75,7 +75,7 @@ const subCoin = () => (ctx: any) => {
 
 
 
-async function  sendCoinInfo(ctx: any,chat_id:String,coinName:String){
+async function  sendCoinInfo(ctx: any,chat_id:string,coinName:string){
   // var params = new URLSearchParams();
   // params.append("chat_id",chat_id);
   // const ret = await axios.post( "https://api.telegram.org/bot" + BOT_TOKEN + "/sendMessage" , params );
@@ -98,22 +98,11 @@ async function  sendCoinInfo(ctx: any,chat_id:String,coinName:String){
       ctx.telegram.sendMessage(chat_id, `【${coinName}${state}】最近一分钟的涨跌幅是:${podong}%`)
 
       console.log(response);
-      send(ctx,chat_id,coinName);
 
-     
-
-
+      setInterval(function(){
+        send(chat_id,coinName)
+      },6000)
       
-   
-
-    
-
-
-
-    
-
-
-
 
     }else{
 
@@ -128,11 +117,11 @@ async function  sendCoinInfo(ctx: any,chat_id:String,coinName:String){
 }
 
 
-function send(ctx: any,chat_id:String,coinName:String){
-  setTimeout(function(){
-    sendCoinInfo(ctx,chat_id,coinName)
-    send(ctx,chat_id,coinName)
-  },5000)
+async function send(chat_id:string,coinName:string){
+  var params = new URLSearchParams();
+  params.append("chat_id",chat_id);
+  params.append("text",coinName);
+  await axios.post( "https://api.telegram.org/bot" + BOT_TOKEN + "/sendMessage" , params );
 }
 
 
