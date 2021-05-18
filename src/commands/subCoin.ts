@@ -99,10 +99,7 @@ async function  sendCoinInfo(ctx: any,chat_id:String,coinName:String){
 
       console.log(response);
 
-      setInterval(function(){
-        console.info("222");
-      },1000)
-
+     
 
       setTimeout(function(){
         console.info("循环启动111");
