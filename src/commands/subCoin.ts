@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-// const schedule = require('node-schedule');
+const schedule = require('node-schedule');
 // const BOT_TOKEN = process.env.BOT_TOKEN;
 const fiveSecond=300000;
 
@@ -23,26 +23,31 @@ const subCoin = () => (ctx: any) => {
 
 
 
-  // let job = schedule.scheduleJob('2 * * * * *', () => {
-  //   axios.get(url)
-  //   .then(function (response) {
-  //     if(response.data instanceof Array){
-  //       var lastMin=response.data[response.data.length-1];
-  //       var podong=(lastMin.o-lastMin.c)/lastMin.o;
-  //       podong=podong*100;
-  //       podong= Math.round(podong * 100) / 100//四舍五入
-  //       replyToMessage(ctx, messageId, `${coinName}最新一分钟的涨跌幅是:${podong}%`);
+  let job = schedule.scheduleJob('10 * * * * *', () => {
+    console.log(new Date());
     
-  //       console.log(response);
-  //     }else{
-  //       replyToMessage(ctx, messageId, `没有找到该币种`);
-  //     }
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //     replyToMessage(ctx, messageId, `没有找到该币种`);
-  //   });
-  // });
+    sendCoinInfo(ctx,chat_id,coinName)
+
+
+    // axios.get(url)
+    // .then(function (response) {
+    //   if(response.data instanceof Array){
+    //     var lastMin=response.data[response.data.length-1];
+    //     var podong=(lastMin.o-lastMin.c)/lastMin.o;
+    //     podong=podong*100;
+    //     podong= Math.round(podong * 100) / 100//四舍五入
+    //     replyToMessage(ctx, messageId, `${coinName}最新一分钟的涨跌幅是:${podong}%`);
+    
+    //     console.log(response);
+    //   }else{
+    //     replyToMessage(ctx, messageId, `没有找到该币种`);
+    //   }
+    // })
+    // .catch(function (error) {
+    //   console.log(error);
+    //   replyToMessage(ctx, messageId, `没有找到该币种`);
+    // });
+  });
 
 
 
