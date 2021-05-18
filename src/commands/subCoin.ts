@@ -19,8 +19,6 @@ const subCoin = () => (ctx: any) => {
   if(coinName==""){
     ctx.telegram.sendMessage(chat_id, `请输入订阅的数字货币名称`)
   }else{
-
-
     sendCoinInfo(ctx,chat_id,coinName)
 
 
@@ -30,17 +28,12 @@ const subCoin = () => (ctx: any) => {
     });
 
     if(coinName=="cancel"){
-      ctx.telegram.sendMessage(chat_id, `取消成功`)
       job.cancel();
     }
 
 
- 
-
 
   //  schedule.scheduleJob("sendCoinTask",'10 * * * * *', () => {
- 
-
  
 
 
@@ -66,7 +59,7 @@ const subCoin = () => (ctx: any) => {
 
 
 
-  // }
+  }
 
 
  
