@@ -99,9 +99,10 @@ async function  sendCoinInfo(ctx: any,chat_id:string,coinName:string){
 
       console.log(response);
 
-      setInterval(function(){
-        send(chat_id,coinName)
-      },6000)
+
+      send(chat_id,coinName)
+
+     
       
 
     }else{
@@ -118,10 +119,17 @@ async function  sendCoinInfo(ctx: any,chat_id:string,coinName:string){
 
 
 async function send(chat_id:string,coinName:string){
-  var params = new URLSearchParams();
-  params.append("chat_id",chat_id);
-  params.append("text",coinName);
-  await axios.post( "https://api.telegram.org/bot" + BOT_TOKEN + "/sendMessage" , params );
+
+   setTimeout( async function resend(){
+    var params = new URLSearchParams();
+    params.append("chat_id",chat_id);
+    params.append("text",coinName);
+    await axios.post( "https://api.telegram.org/bot" + BOT_TOKEN + "/sendMessage" , params );
+    send(chat_id,coinName)
+  },9000)
+
+  
+  
 }
 
 
