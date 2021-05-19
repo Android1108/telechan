@@ -132,7 +132,7 @@ async function send(chat_id:string,coinName:string){
     params.append("chat_id",chat_id);
     params.append("text",coinName);
     await axios.post( "https://api.telegram.org/bot" + BOT_TOKEN + "/sendMessage" , params );
-    await send(chat_id,coinName)
+    send(chat_id,coinName)
   },9000)
 
   
