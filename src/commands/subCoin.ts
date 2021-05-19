@@ -86,7 +86,7 @@ async function  sendCoinInfo(ctx: any,chat_id:string,coinName:string){
   let url='https://data.block.cc/api/v3/kline?desc=okex_'+coinName+'_USDT&interval=1m&api_key=YPCNWDHCQYHJTPCTVLEQWUED1IJKWYM7F097TYTU&start='+startTime
 
   await axios.get(url)
-  .then(function (response) {
+  .then( function (response) {
     if(response.data instanceof Array){
       var state="上涨"
       var lastMin=response.data[response.data.length-1];
@@ -102,6 +102,7 @@ async function  sendCoinInfo(ctx: any,chat_id:string,coinName:string){
 
       console.log(response);
 
+      console.log('我在循环中循环中1111');
       send(chat_id,coinName);
 
   
@@ -123,6 +124,7 @@ async function  sendCoinInfo(ctx: any,chat_id:string,coinName:string){
 
 
 async function send(chat_id:string,coinName:string){
+  console.log('我在循环中循环中${chat_id}');
    setTimeout( 
      async function resend(){
     console.log('循环中');
