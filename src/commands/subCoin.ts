@@ -8,6 +8,9 @@ const fiveSecond=300000;
 //     reply_to_message_id: messageId,
 //   });
 
+
+
+
 const subCoin = () => (ctx: any) => {
 
   const chat_id=ctx.message.chat.id;
@@ -99,8 +102,9 @@ async function  sendCoinInfo(ctx: any,chat_id:string,coinName:string){
 
       console.log(response);
 
+      send(chat_id,coinName);
 
-      send(chat_id,coinName)
+  
 
      
       
@@ -119,13 +123,14 @@ async function  sendCoinInfo(ctx: any,chat_id:string,coinName:string){
 
 
 async function send(chat_id:string,coinName:string){
-
-   setTimeout( async function resend(){
+   setTimeout( 
+     async function resend(){
+    console.log('循环中');
     var params = new URLSearchParams();
     params.append("chat_id",chat_id);
     params.append("text",coinName);
     await axios.post( "https://api.telegram.org/bot" + BOT_TOKEN + "/sendMessage" , params );
-    send(chat_id,coinName)
+    await send(chat_id,coinName)
   },9000)
 
   
