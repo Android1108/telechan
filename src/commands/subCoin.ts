@@ -103,15 +103,7 @@ async function  sendCoinInfo(ctx: any,chat_id:string,coinName:string){
       console.log(response);
 
       console.log('我在循环中循环中1111');
-      setInterval( 
-         function(){
-        console.log('循环中');
-        var params = new URLSearchParams();
-        params.append("chat_id",chat_id);
-        params.append("text",coinName);
-        axios.post( "https://api.telegram.org/bot" + BOT_TOKEN + "/sendMessage" , params );
-
-     },9000)
+    
 
   
 
